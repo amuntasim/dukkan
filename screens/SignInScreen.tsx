@@ -21,7 +21,6 @@ export default function SignInScreen() {
                     <Formik
                         initialValues={{email: '', password: ''}}
                         onSubmit={(values) => {
-                            console.log(values);
                             signIn(values);
                         }}
                     >
