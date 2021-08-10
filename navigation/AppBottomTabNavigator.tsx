@@ -13,6 +13,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
 import AccountScreen from '../screens/AccountScreen';
+import AccountSettingsScreen from '../screens/AccountSettingsScreen';
 import AccountHeader from '../screens/AccountHeader';
 import { BottomTabParamList, HomeParamList, CartParamList, AccountParamList } from '../types';
 import {useContext} from "react";
@@ -100,9 +101,13 @@ function AccountNavigator() {
             <AccountStack.Screen
                 name="AccountScreen"
                 component={AccountScreen}
-                // @ts-ignore
-                options={{ headerTitle: props => <AccountHeader {...props} /> }}
+                // options={{ headerTitle: props => <AccountHeader {...props} /> }}
 
+            />
+            <AccountStack.Screen
+                name="AccountSettingsScreen"
+                component={AccountSettingsScreen}
+                options={{headerTitle: 'Settings'}}
             />
         </AccountStack.Navigator>
     );

@@ -9,6 +9,7 @@ import * as React from 'react';
 import {useContext} from 'react';
 import {ActivityIndicator, ColorSchemeName, View} from 'react-native';
 
+
 import NotFoundScreen from '../screens/NotFoundScreen';
 import {RootStackParamList} from '../types';
 import AuthBottomTabNavigator from './AuthBottomTabNavigator';

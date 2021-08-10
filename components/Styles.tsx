@@ -50,18 +50,11 @@ export default StyleSheet.create({
         height: 45,
         marginTop: 10,
     },
-    fbLoginButton: {
-        height: 45,
-        marginTop: 10,
-        backgroundColor: 'transparent',
-    },
 
     header: {
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     headerText: {
         fontWeight: 'bold',
@@ -69,12 +62,58 @@ export default StyleSheet.create({
         color: '#333',
         letterSpacing: 1,
     },
-    icon: {
+    headerIcon: {
         position: 'absolute',
-        left: 16,
+        right: 16,
     },
     headerTitle: {
         flexDirection: 'row'
     },
+    centeredHorView: {
+        flex: 1,
+        marginTop: 22,
+        alignItems: "center",
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    }
 })
 

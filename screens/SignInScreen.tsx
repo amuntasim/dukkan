@@ -14,8 +14,7 @@ export default function SignInScreen() {
     const {signed, signIn} = useContext(AuthContext)
 
     return (
-        <KeyboardAvoidingView style={styles.flexContainer} behavior="padding">
-
+        // <KeyboardAvoidingView style={styles.flexContainer} behavior="padding">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.loginScreenContainer}>
                     <Formik
@@ -47,7 +46,7 @@ export default function SignInScreen() {
                     </Formik>
                 </View>
             </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+        // </KeyboardAvoidingView>
     );
 }
 
