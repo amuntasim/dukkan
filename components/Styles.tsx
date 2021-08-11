@@ -114,6 +114,18 @@ export default StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: "center"
+    },
+    gridContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        backgroundColor: "#f1f1f1",
+    },
+    twoColumnItem: {
+        width: '50%',
+        backgroundColor: "#ffffff",
+        margin: 5,
+        padding: 5
     }
 })
 
