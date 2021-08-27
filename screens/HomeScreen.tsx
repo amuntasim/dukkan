@@ -4,11 +4,12 @@ import styles from '../components/Styles';
 
 import {Text, View} from '../components/Themed';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {Alert, FlatList} from "react-native";
+import {Alert, FlatList, Modal} from "react-native";
 import api from "../services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext from "../context/auth";
 import {ListItem, SearchBar} from "react-native-elements";
+import ProductDetail from "../components/ProductDetail";
 
 export default function HomeScreen(props: any) {
     const {navigation} = props;
@@ -17,6 +18,9 @@ export default function HomeScreen(props: any) {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState(products);
     const [filter, setFilter] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalContent, setModalContent] = useState(<View></View>);
+
 
     useEffect(() => {
         async function localStorageProducts() {
@@ -57,6 +61,16 @@ export default function HomeScreen(props: any) {
             ]
         );
 
+    let decode = (str: string) => {
+        let returnText = str;
+        returnText = returnText.replace(/&nbsp;/gi, " ");
+        returnText = returnText.replace(/&amp;/gi, "&");
+        returnText = returnText.replace(/&quot;/gi, `"`);
+        returnText = returnText.replace(/&lt;/gi, "<");
+        returnText = returnText.replace(/&gt;/gi, ">");
+        return returnText;
+    }
+
     async function reloadProducts() {
         await refreshToken();
         const url = 'products&cust_token=' + access
@@ -77,11 +91,14 @@ export default function HomeScreen(props: any) {
 
             for (let productId in rawProducts) {
                 let product = rawProducts[productId];
+
                 tmpProducts.push({
-                    productId, name: product.name, price: product.price,
-                    model: product.model, tag: product.tag, status: product.status
+                    productId, name: product.name, price: parseFloat(product.price).toFixed(2),
+                    model: product.model, tag: product.tag,
+                    description: decode(product.description).replace(/<\/?[^>]+(>|$)/g, ""), status: product.status
                 })
             }
+
 
             setProducts(tmpProducts)
             await AsyncStorage.setItem('@DKKN:products', JSON.stringify(tmpProducts));
@@ -89,13 +106,17 @@ export default function HomeScreen(props: any) {
 
     }
 
+    const renderProductDetail = (product: any) => {
+        return <ProductDetail setModalVisible={setModalVisible} product={product}></ProductDetail>
+    }
+
     const productSelected = (product: any) => {
-        console.log('selected product')
-        console.log(product)
+        setModalContent(renderProductDetail(product))
+        setModalVisible(true);
     }
     // @ts-ignore
     const renderProducts = ({item}) => (
-        <ListItem key="pref-lang" bottomDivider style={{}}>
+        <ListItem key="pref-lang" bottomDivider style={{}} onPress={() => productSelected(item)}>
             <ListItem.Content style={{}}>
                 <ListItem.Title>
                     <Text>{item.name}</Text>
@@ -119,8 +140,6 @@ export default function HomeScreen(props: any) {
             });
             setFilteredProducts(tmpProducts);
         } else {
-            console.log('.....')
-            console.log(products.length)
             setFilteredProducts(products);
         }
     };
@@ -137,6 +156,24 @@ export default function HomeScreen(props: any) {
                 autoCorrect={false}
                 value={filter}
             />
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalView}>
+                        {modalContent}
+                        <MaterialCommunityIcons name='close-circle-outline' size={36}
+                                                onPress={() => setModalVisible(!modalVisible)}
+                                                style={styles.modalCloseIcon}/>
+
+                    </View>
+                </View>
+            </Modal>
             <FlatList
                 data={filteredProducts}
                 renderItem={renderProducts}

@@ -3,43 +3,73 @@
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
 
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import {Ionicons} from '@expo/vector-icons';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import * as React from 'react';
+import {useContext} from 'react';
+import {Text, View} from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
-import CartScreen from '../screens/CartScreen';
+import {CartScreen} from '../screens/CartScreen';
 import AccountScreen from '../screens/AccountScreen';
 import AccountSettingsScreen from '../screens/AccountSettingsScreen';
-import AccountHeader from '../screens/AccountHeader';
-import { BottomTabParamList, HomeParamList, CartParamList, AccountParamList } from '../types';
-import {useContext} from "react";
+import {AccountParamList, BottomTabParamList, CartParamList, HomeParamList} from '../types';
 import AuthContext from "../context/auth";
+import CartContext from "../context/cart";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
+const NotificationTabBarIcon = (props: any) => (
+    props.notificationCount > 0 ?
+
+        <Text
+            style={{
+                color: '#FFFFFF',
+                position: 'absolute',
+                top: 1,
+                right: 1,
+                margin: -1,
+                minWidth: 13,
+                height: 13,
+                borderRadius: 7,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#FF0000',
+                textAlign: "center",
+                fontSize: 9
+            }}>{props.notificationCount}</Text>
+        : null
+);
 export default function AppBottomTabNavigator() {
     const colorScheme = useColorScheme();
-
+    // @ts-ignore
+    const {cartState, dispatch}= useContext(CartContext)
     return (
         <BottomTab.Navigator
             initialRouteName="Home"
-            tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+            tabBarOptions={{activeTintColor: Colors[colorScheme].tint}}>
             <BottomTab.Screen
                 name="Home"
                 component={HomeNavigator}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-home" color={color} />,
+                    tabBarIcon: ({color}) => <TabBarIcon name="ios-home" color={color}/>,
                 }}
             />
             <BottomTab.Screen
                 name="Cart"
                 component={CartNavigator}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-cart" color={color} />,
+                    tabBarIcon: ({color}) => {
+                        return (
+                            <View>
+                                <TabBarIcon name="ios-cart" color={color}/>
+                                <NotificationTabBarIcon notificationCount={cartState.cartItems.length}/>
+                            </View>
+                        )
+                    },
                 }}
             />
 
@@ -47,7 +77,7 @@ export default function AppBottomTabNavigator() {
                 name="Account"
                 component={AccountNavigator}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-person" color={color} />,
+                    tabBarIcon: ({color}) => <TabBarIcon name="ios-person" color={color}/>,
                 }}
             />
 
@@ -58,7 +88,7 @@ export default function AppBottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-    return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+    return <Ionicons size={30} style={{marginBottom: -3}} {...props} />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -71,7 +101,7 @@ function HomeNavigator() {
             <HomeStack.Screen
                 name="HomeScreen"
                 component={HomeScreen}
-                options={{ headerTitle: 'Home' }}
+                options={{headerTitle: 'Home'}}
             />
         </HomeStack.Navigator>
     );
@@ -85,7 +115,7 @@ function CartNavigator() {
             <CartStack.Screen
                 name="CartScreen"
                 component={CartScreen}
-                options={{ headerTitle: 'My cart' }}
+                // options={{ headerTitle: 'My cart' }}
             />
         </CartStack.Navigator>
     );

@@ -62,6 +62,12 @@ export default StyleSheet.create({
         color: '#333',
         letterSpacing: 1,
     },
+    modalCloseIcon: {
+        position: 'absolute',
+        right: 0,
+        top:  0,
+        fontWeight: 'bold'
+    },
     headerIcon: {
         position: 'absolute',
         right: 16,
@@ -80,18 +86,25 @@ export default StyleSheet.create({
         alignItems: "center",
         marginTop: 22
     },
+    modalContainer: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.2)',
+    },
     modalView: {
-        margin: 20,
-        backgroundColor: "white",
+        margin: 10,
+        marginTop: '50%',
+        // backgroundColor: "white",
         borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
+        borderColor: '#414141',
+        justifyContent: "center",
+        padding: 15,
+        // alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
-            height: 2
+            width: 2,
+            height: 5
         },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.6,
         shadowRadius: 4,
         elevation: 5
     },

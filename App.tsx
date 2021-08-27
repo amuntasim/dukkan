@@ -7,7 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import {AuthProvider} from './context/auth'
-
+import {CartProvider} from './context/cart'
 
 export default function App() {
     const isLoadingComplete = useCachedResources();
@@ -19,8 +19,10 @@ export default function App() {
         return (
             <SafeAreaProvider>
                 <AuthProvider>
-                    <Navigation colorScheme={colorScheme}/>
-                    <StatusBar/>
+                    <CartProvider>
+                        <Navigation colorScheme={colorScheme}/>
+                        <StatusBar/>
+                    </CartProvider>
                 </AuthProvider>
             </SafeAreaProvider>
         );

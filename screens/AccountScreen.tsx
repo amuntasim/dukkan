@@ -7,12 +7,13 @@ import AuthContext from "../context/auth";
 import {Modal, Pressable} from "react-native";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
-export default function AccountScreen(props:any) {
+export default function AccountScreen(props: any) {
     const {navigation} = props;
 
     // @ts-ignore
     const {customer}: {} = useContext(AuthContext)
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalContent, setModalContent] = useState(null);
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -20,7 +21,7 @@ export default function AccountScreen(props:any) {
                 <Text style={styles.headerText}>{customer.name}</Text>
             ),
             headerRight: () => (
-                <MaterialCommunityIcons name='account-cog' size={28} onPress={openSettings} style={styles.headerIcon} />
+                <MaterialCommunityIcons name='account-cog' size={28} onPress={openSettings} style={styles.headerIcon}/>
             ),
         });
     }, [navigation]);
@@ -31,7 +32,7 @@ export default function AccountScreen(props:any) {
     return (
         <View style={styles.container}>
             <Modal
-                 animationType="slide"
+                animationType="slide"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
@@ -50,8 +51,8 @@ export default function AccountScreen(props:any) {
                     </View>
                 </View>
             </Modal>
-                <Text style={styles.title}>Account</Text>
+            <Text style={styles.title}>Account</Text>
         </View>
-);
+    );
 }
 
