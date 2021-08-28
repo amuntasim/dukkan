@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, View} from './Themed';
 import {TextInput} from "react-native-gesture-handler";
 import CartContext from "../context/cart";
-import * as Actions from "../constants/ActionTypes";
+import * as CartActions from "../context/reducers/cart/cartActions";
 
 export default function ProductDetail({product, setModalVisible}: { product: any , setModalVisible:any}) {
     // @ts-ignore
@@ -11,7 +11,7 @@ export default function ProductDetail({product, setModalVisible}: { product: any
     const [countValue, setCountValue] = useState(1);
 
     const addToCart = () => {
-        cartDispatch({ type: Actions.AddToCart, cartItem: product, quantity: countValue });
+        cartDispatch({ type: CartActions.AddToCart, cartItem: product, quantity: countValue });
         setModalVisible(false);
     }
     const decrement = () => {

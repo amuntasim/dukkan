@@ -6,16 +6,13 @@ import {
   FlatList,
   Alert,
 } from "react-native";
-//Redux
-// import { useDispatch } from "react-redux";
-//Action
-// import { removeFromCart, addToCart, decCartQuantity } from "../../../reducers";
+
 import {
   AddToCart,
   RemoveItemCart,
   UpdateExistingItemQuantity,
   RemoveSingleItemFromCart
-} from "../../../constants/ActionTypes";
+} from "../../../context/reducers/cart/cartActions";
 //Text
 import CustomText from "../../../components/UI/CustomText";
 //Colors

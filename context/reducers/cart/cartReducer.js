@@ -4,8 +4,8 @@ import {
   RemoveItemCart,
   UpdateExistingItemQuantity,
   RemoveSingleItemFromCart
-} from "../../constants/ActionTypes";
-import {Cart} from "../../models/Cart";
+} from "./cartActions";
+import {Cart} from "../../../models/Cart";
 
 const findIndex = (cartList, id) => {
   const index = cartList.findIndex((cart) => {
@@ -46,18 +46,18 @@ export const CartReducer = (state, action) => {
       };
 
     case RemoveItemCart:
-        index = findIndex(cartItems, action.itemId);
+      index = findIndex(cartItems, action.itemId);
       // console.log('cartItems[index]')
       // console.log(cartItems[index])
-        // if (index >= 0) {
-        //   cartItems[index] = new Cart(
-        //       action.cartItem,
-        //       +cartItems[index].quantity + action.quantity
-        //   );
-        // } else {
-        //   const newItem = new Cart(action.cartItem, action.quantity);
-        //   cartItems.push(newItem);
-        // }
+      // if (index >= 0) {
+      //   cartItems[index] = new Cart(
+      //       action.cartItem,
+      //       +cartItems[index].quantity + action.quantity
+      //   );
+      // } else {
+      //   const newItem = new Cart(action.cartItem, action.quantity);
+      //   cartItems.push(newItem);
+      // }
 
       return {
         ...state,

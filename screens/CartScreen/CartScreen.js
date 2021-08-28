@@ -8,11 +8,16 @@ import { Header, CartBody, TotalButton } from './components';
 import Loader from '../../components/Loaders/Loader';
 import CartContext from "../../context/cart";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {expressOrder} from "../../context/reducers/order";
+import AuthContext from "../../context/auth";
+import OrderContext from "../../context/order";
 
 export const CartScreen = (props) => {
   const {navigation} = props;
   const [isRefreshing, setIsRefreshing] = useState(false);
   const {cartState, dispatch: cartDispatch} = useContext(CartContext)
+  const {orderState, dispatch: orderDispatch} = useContext(OrderContext)
+  const {access, refreshToken} = useContext(AuthContext)
   const loading = cartState.isLoading;
   const {cartItems} = cartState;
   let total = 0;
@@ -26,8 +31,8 @@ export const CartScreen = (props) => {
     });
   }, [navigation]);
   const placeOrder = async () => {
-    // TODO
     console.log('placing order..')
+    await expressOrder(cartItems)({cartDispatch, orderDispatch}, {access})
   };
 
   return (

@@ -1,9 +1,7 @@
 import React, {createContext, useReducer, useEffect, useState} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import api from '../services/api'
-import { CartReducer } from './reducers/CartReducer';
+import { CartReducer } from './reducers/cart/cartReducer';
 
-import * as Actions  from '../constants/ActionTypes';
 
 const CartContext = createContext({});
 
