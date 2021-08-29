@@ -14,8 +14,9 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 import {CartScreen} from '../screens/CartScreen';
-import AccountScreen from '../screens/AccountScreen';
-import AccountSettingsScreen from '../screens/AccountSettingsScreen';
+import AccountScreen from '../screens/AccountScreen/AccountScreen';
+import AccountSettingsScreen from '../screens/AccountScreen/AccountSettingsScreen';
+import MyOrdersScreen from "../screens/AccountScreen/MyOrdersScreen";
 import {AccountParamList, BottomTabParamList, CartParamList, HomeParamList} from '../types';
 import AuthContext from "../context/auth";
 import CartContext from "../context/cart";
@@ -138,6 +139,11 @@ function AccountNavigator() {
                 name="AccountSettingsScreen"
                 component={AccountSettingsScreen}
                 options={{headerTitle: 'Settings'}}
+            />
+            <AccountStack.Screen
+                name="MyOrdersScreen"
+                component={MyOrdersScreen}
+                options={{headerTitle: 'Orders'}}
             />
         </AccountStack.Navigator>
     );

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useContext, useState} from 'react';
-import styles from '../components/Styles';
+import styles from '../../components/Styles';
 
-import {Text, View} from '../components/Themed';
-import AuthContext from "../context/auth";
+import {Text, View} from '../../components/Themed';
+import AuthContext from "../../context/auth";
 import {Modal, Pressable} from "react-native";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 

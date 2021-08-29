@@ -116,7 +116,7 @@ export default function HomeScreen(props: any) {
     }
     // @ts-ignore
     const renderProducts = ({item}) => (
-        <ListItem key="pref-lang" bottomDivider style={{}} onPress={() => productSelected(item)}>
+        <ListItem key={`product-item-${item.productId}`} bottomDivider style={{}} onPress={() => productSelected(item)}>
             <ListItem.Content style={{}}>
                 <ListItem.Title>
                     <Text>{item.name}</Text>

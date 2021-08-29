@@ -9,11 +9,11 @@ import {
 
 import {
   AddToCart,
-  RemoveItemCart,
+  ClearCart,
   UpdateExistingItemQuantity,
   RemoveSingleItemFromCart
 } from "../../../context/reducers/cart/cartActions";
-//Text
+import Styles from "../../../components/Styles";
 import CustomText from "../../../components/UI/CustomText";
 //Colors
 import Colors from "../../../utils/Colors";
@@ -45,7 +45,7 @@ export const CartBody = ({
   return (
     <View style={styles.footer}>
       {carts.cartItems.length === 0 ? (
-        <View style={styles.center}>
+        <View style={Styles.center}>
           <CustomText style={{ fontSize: 16 }}>
             There are no products in the cart yet
           </CustomText>
@@ -92,10 +92,5 @@ const styles = StyleSheet.create({
     borderColor: Colors.lighter_green,
     marginTop: 10,
   },
-  center: {
-    height: "100%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
 });

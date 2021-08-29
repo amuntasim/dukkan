@@ -1,7 +1,7 @@
 import {
   InitCart,
   AddToCart,
-  RemoveItemCart,
+  ClearCart,
   UpdateExistingItemQuantity,
   RemoveSingleItemFromCart
 } from "./cartActions";
@@ -45,20 +45,8 @@ export const CartReducer = (state, action) => {
         isLoading: false,
       };
 
-    case RemoveItemCart:
-      index = findIndex(cartItems, action.itemId);
-      // console.log('cartItems[index]')
-      // console.log(cartItems[index])
-      // if (index >= 0) {
-      //   cartItems[index] = new Cart(
-      //       action.cartItem,
-      //       +cartItems[index].quantity + action.quantity
-      //   );
-      // } else {
-      //   const newItem = new Cart(action.cartItem, action.quantity);
-      //   cartItems.push(newItem);
-      // }
-
+    case ClearCart:
+      cartItems.length = 0;
       return {
         ...state,
         cartItems,

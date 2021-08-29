@@ -2,10 +2,13 @@ import React from "react";
 import { View, Dimensions } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import Colors from "../../utils/Colors";
+import {Text} from "../Themed";
+import Styles from "../Styles";
 
-const { width, height } = Dimensions.get("window");
+const { width, height, _text } = Dimensions.get("window");
 
 const Loader = () => {
+    const text = _text || 'Processing, please wait!'
   return (
     <View
       style={{
@@ -18,6 +21,7 @@ const Loader = () => {
         justifyContent: "center",
       }}
     >
+      <Text style={{textAlign: 'center', marginBottom: 10}}> {text} </Text>
       <ActivityIndicator size='large' color={Colors.lighter_green} />
     </View>
   );

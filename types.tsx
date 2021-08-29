@@ -26,6 +26,7 @@ export type CartParamList = {
 export type AccountParamList = {
   AccountScreen: undefined;
   AccountSettingsScreen: undefined;
+  MyOrdersScreen: undefined;
 };
 export type SignInParamList = {
   SignInScreen: undefined;

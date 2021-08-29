@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {useContext, useState} from 'react';
-import styles from '../components/Styles';
+import Styles from '../../components/Styles';
 
-import {Text, View} from '../components/Themed';
-import AuthContext from "../context/auth";
+import {Text, View} from '../../components/Themed';
+import AuthContext from "../../context/auth";
 import {Modal, Pressable} from "react-native";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {ListItem} from "react-native-elements";
 
 export default function AccountScreen(props: any) {
     const {navigation} = props;
@@ -18,10 +19,10 @@ export default function AccountScreen(props: any) {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerTitle: () => (
-                <Text style={styles.headerText}>{customer.name}</Text>
+                <Text style={Styles.headerText}>{customer.name}</Text>
             ),
             headerRight: () => (
-                <MaterialCommunityIcons name='account-cog' size={28} onPress={openSettings} style={styles.headerIcon}/>
+                <MaterialCommunityIcons name='account-cog' size={28} onPress={openSettings} style={Styles.headerIcon}/>
             ),
         });
     }, [navigation]);
@@ -30,7 +31,7 @@ export default function AccountScreen(props: any) {
         navigation.navigate('AccountSettingsScreen', {})
     }
     return (
-        <View style={styles.container}>
+        <View style={Styles.flexContainer}>
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -39,19 +40,30 @@ export default function AccountScreen(props: any) {
                     setModalVisible(!modalVisible);
                 }}
             >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Hello World!</Text>
+                <View style={Styles.centeredView}>
+                    <View style={Styles.modalView}>
+                        <Text style={Styles.modalText}>Hello World!</Text>
                         <Pressable
-                            style={[styles.button, styles.buttonClose]}
+                            style={[Styles.button, Styles.buttonClose]}
                             onPress={() => setModalVisible(!modalVisible)}
                         >
-                            <Text style={styles.textStyle}>Hide Modal</Text>
+                            <Text style={Styles.textStyle}>Hide Modal</Text>
                         </Pressable>
                     </View>
                 </View>
             </Modal>
-            <Text style={styles.title}>Account</Text>
+            <ListItem key="account-orders"  style={{}}>
+                <ListItem.Content style={{}}>
+                    <ListItem.Title>
+                        <Text style={Styles.subtitle}>My orders</Text>
+                    </ListItem.Title>
+                </ListItem.Content>
+                <ListItem.Content right>
+                    <Text onPress={() => navigation.navigate('MyOrdersScreen', {})}>
+                        All orders {">>"}
+                    </Text>
+                </ListItem.Content>
+            </ListItem>
         </View>
     );
 }

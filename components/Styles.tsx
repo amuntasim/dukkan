@@ -3,7 +3,7 @@ import {StyleSheet} from "react-native";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
+        padding: 10,
     },
 
     flexContainer: {
@@ -11,6 +11,10 @@ export default StyleSheet.create({
     },
     title: {
         fontSize: 20,
+        fontWeight: 'bold',
+    },
+    subtitle: {
+        fontSize: 16,
         fontWeight: 'bold',
     },
     separator: {
@@ -24,6 +28,10 @@ export default StyleSheet.create({
         marginTop: 150,
         marginBottom: 30,
         textAlign: 'center',
+    },
+    link: {
+        color: '#3897f1',
+        textDecorationLine: 'underline'
     },
     loginScreenContainer: {
         flex: 1
@@ -139,6 +147,12 @@ export default StyleSheet.create({
         backgroundColor: "#ffffff",
         margin: 5,
         padding: 5
-    }
+    },
+    center: {
+        height: "100%",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
+    },
 })
 
