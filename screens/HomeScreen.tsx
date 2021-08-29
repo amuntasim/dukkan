@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useMemo, useRef, useState} from 'react';
 import styles from '../components/Styles';
 
 import {Text, View} from '../components/Themed';
@@ -20,20 +20,28 @@ export default function HomeScreen(props: any) {
     const [filter, setFilter] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState(<View></View>);
+    const mountedRef = useRef(true)
 
 
     useEffect(() => {
         async function localStorageProducts() {
             const tmpProducts = await AsyncStorage.getItem('@DKKN:products')
             if (tmpProducts) {
-                setProducts(JSON.parse(tmpProducts))
+                if(mountedRef.current){
+                    setProducts(JSON.parse(tmpProducts))
+                }
             } else {
-                reloadProducts();
+               await reloadProducts();
             }
         }
 
-        localStorageProducts();
-    }, [])
+        localStorageProducts().then(()=>{
+            //
+        });
+        return () => {
+            mountedRef.current = false
+        }
+    }, [products])
 
     useEffect(() => {
         setFilteredProducts(products);
@@ -114,8 +122,9 @@ export default function HomeScreen(props: any) {
         setModalContent(renderProductDetail(product))
         setModalVisible(true);
     }
+
     // @ts-ignore
-    const renderProducts = ({item}) => (
+    const renderProduct = ({item}) => (
         <ListItem key={`product-item-${item.productId}`} bottomDivider style={{}} onPress={() => productSelected(item)}>
             <ListItem.Content style={{}}>
                 <ListItem.Title>
@@ -130,6 +139,8 @@ export default function HomeScreen(props: any) {
             </ListItem.Content>
         </ListItem>
     );
+    const memoizedRenderProduct = useMemo(() => renderProduct, [products, filteredProducts]);
+
     const updateFilter = (search: any) => {
         setFilter(search);
         if (search.length > 0) {
@@ -143,7 +154,6 @@ export default function HomeScreen(props: any) {
             setFilteredProducts(products);
         }
     };
-
 
     return (
         <View style={[styles.container]}>
@@ -176,7 +186,8 @@ export default function HomeScreen(props: any) {
             </Modal>
             <FlatList
                 data={filteredProducts}
-                renderItem={renderProducts}
+                initialNumToRender={20}
+                renderItem={memoizedRenderProduct}
                 keyExtractor={item => `${item.productId}`}
             />
         </View>

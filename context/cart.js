@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useEffect, useState} from 'react'
+import React, {createContext, useReducer, useEffect, useState, useRef} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { CartReducer } from './reducers/cart/cartReducer';
 
@@ -21,8 +21,8 @@ export const CartProvider = ({children}) => {
     }, [])
 
     async function loadCart() {
-        const cartMap = JSON.parse(await AsyncStorage.getItem(cartMapKey))
-        console.log({cartMap})
+        // const cartMap = JSON.parse(await AsyncStorage.getItem(cartMapKey))
+        // console.log({cartMap})
         // dispatch({ type: Actions.InitCart, cart: cartMap })
     }
     return (

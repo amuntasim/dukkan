@@ -20,7 +20,7 @@ export const CartScreen = (props) => {
     const {cartState, dispatch: cartDispatch} = useContext(CartContext)
     const {orderState, dispatch: orderDispatch} = useContext(OrderContext)
     const {access, refreshToken} = useContext(AuthContext)
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const {cartItems} = cartState;
     let total = 0;

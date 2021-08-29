@@ -21,7 +21,6 @@ export default function MyOrdersScreen(props: any) {
     const {orderState, dispatch: orderDispatch} = useContext(OrderContext)
     const [loading, setLoading] = useState(false);
     const [isRefreshing, setIsRefreshing] = useState(false);
-    console.log({orderState})
     const syncOrders = async () => {
         try {
             setLoading(true);
